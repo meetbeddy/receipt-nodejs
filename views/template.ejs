@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	</head>
+	<body>
+		<style>
+			@font-face {
+				font-family: "Segoe UI";
+				src: url("/public/SEGOEUI.TTF");
+			}
+
+			@media print {
+				.footer,
+				#non-printable {
+					display: none !important;
+				}
+			}
+
+			body {
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+			}
+
+			.rotate1 {
+				width: 200px;
+				height: 53px;
+				margin: 0 0 0 375px;
+				text-align: center;
+				font-size: 36px;
+				font-family: arial black;
+				font-weight: bold;
+				color: rgb(0, 0, 0);
+				background-color: rgb(255, 255, 255);
+				transform: rotate(90deg);
+				position: relative;
+				left: 46px;
+				top: 105px;
+			}
+		</style>
+
+		<style>
+			.caption {
+				font-size: 14px;
+				font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+			}
+
+			.val {
+				font-weight: bolder;
+			}
+
+			.left-wrapper {
+				display: flex;
+				flex-direction: column;
+				position: absolute;
+				top: 100px;
+				left: 20px;
+			}
+
+			.left-wrapper .val {
+				margin-bottom: 4px;
+			}
+
+			.right-wrapper {
+				display: flex;
+				position: absolute;
+				top: 140px;
+				line-height: 20px;
+				left: -120px;
+			}
+
+			.TR3 {
+				position: relative;
+				left: -70px;
+				white-space: nowrap;
+			}
+
+			.qrcode-wrapper {
+				position: absolute;
+				right: 40px;
+				bottom: 10px;
+			}
+		</style>
+
+		<div class="left-wrapper">
+			<div class="caption TL1">Owner's Name</div>
+			<div class="caption TL2 val"><%= ownerName %></div>
+			<div class="caption TL3">Address</div>
+			<div class="caption TL4 val" style="width: 300px"><%= address %></div>
+			<div class="caption TL5">File Number:</div>
+			<div class="caption TL6 val">11618216</div>
+			<div class="caption TL7">Registration Number:</div>
+			<div class="caption TL8 val"><%= plate_number %></div>
+			<div class="caption TL9">Engine Number:</div>
+			<div class="caption TL10 val"><%= engine_number %></div>
+			<div class="caption TL11">Chassis Number:</div>
+			<div class="caption TL12 val"><%= chassis_number %></div>
+			<div class="caption TL13">Vehicle Make:</div>
+			<div class="caption TL14 val"><%= vehicle_make %></div>
+			<div class="caption TL15">License Fee:</div>
+			<div class="caption TL16 val"><%= hackneyPrice %></div>
+			<div class="caption TL17">Date:</div>
+			<div class="caption TL18 val"><%= formatDate(date_issued) %></div>
+
+			<div class="qrcode-wrapper">
+				<img
+					src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=<%= qrCodeData %>"
+					width="100"
+					height="100"
+					style="border: none" />
+			</div>
+		</div>
+
+		<div class="right-wrapper">
+			<div class="rotate1">
+				<%= getMonthName(hackney_permit_expires_at) %> <%=
+				getYear(hackney_permit_expires_at) %>
+			</div>
+			<div class="text-caption">
+				<div class="caption TR3">PIN: <%= latest_transaction_ref %></div>
+				<div class="caption TR4">Reg. Number: <%= plate_number %></div>
+				<div class="caption TR5">Govt. Number:</div>
+				<div class="caption TR6">Engine Number: <%= engine_number %></div>
+				<div class="caption TR7">Chassis Number: <%= chassis_number %></div>
+				<div class="caption TR8">Vehicle Make: <%= vehicle_make %></div>
+				<div class="caption TR9">Vehicle Model: <%= vehicle_model %></div>
+				<div class="caption TR10">Colour: <%= vehicle_color %></div>
+				<div class="caption TR11">Engine Capacity: <%= engine_capacity %></div>
+				<div class="caption TR12">
+					Transaction Date: <%= formatDate(date_issued) %>
+				</div>
+				<div class="caption TR13">
+					Date Issued: <%= formatDate(date_issued) %>
+				</div>
+				<div class="caption TR14">
+					Expiry Date: <%= formatDate(hackney_permit_expires_at) %>
+				</div>
+				<div class="caption TR15">
+					SMS Fee: <span class="val">₦200.00</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
